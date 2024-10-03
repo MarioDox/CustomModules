@@ -1,0 +1,9 @@
+Name: Wario Waft Fix
+Description: Waft no longer charges up during round countdown, where players spawning first would get an advantage than the ones after
+Version: 1.0
+Last Build compatibility: Project+ v.3.0.5
+Other info: Affects also Wario-Man.
+
+Credits:
+-MarioDox
+-P+DT/PMDT
