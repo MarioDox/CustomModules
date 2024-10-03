@@ -1,0 +1,11 @@
+Name: Olimar Fixes
+Description: Fixes various bugs related to the Pikmin.
+Version: 1.2
+Last Build compatibility: Project+ v.3.0.5
+Other info: Fixes 2 main bugs.
+Pikmins losing (PM added) intangibility when Olimar travelled too far during aerial attacks.When a Pikmin is locked into Olimar's hands, they don't effectively move, just their model does. Because the Pikmin is too far from Olimar the "autonomy" coding kicks in, making their hurtbox be vulnerable again, as in vBrawl they were never invulnerable during attacks in the first place, it's something PM added.
+Pikmins being treated as usable during smash attacks endlag, making attacks not use any even if the rest of the party is accessible. This is a vBrawl bug.
+
+Credits:
+-MarioDox
+-P+DT/PMDT
