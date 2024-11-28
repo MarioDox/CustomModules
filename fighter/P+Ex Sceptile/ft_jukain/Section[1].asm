@@ -113,14 +113,18 @@ loc_178:
     /* 000001A0: */    addi r0,r25,0x2990
     /* 000001A4: */    stw r0,0x10(r1)
     /* 000001A8: */    addi r0,r25,0x2BBC
-    /* 000001AC: */    stw r0,0x14(r1)
-    /* 000001B0: */    addi r0,r25,0x3454
-    /* 000001B4: */    stw r0,0x18(r1)
-    /* 000001B8: */    lis r3,-0x0                              [R_PPC_ADDR16_HA(27, 6, "loc_3AC")]
-    /* 000001BC: */    addi r3,r3,-0x0                          [R_PPC_ADDR16_LO(27, 6, "loc_3AC")]
-    /* 000001C0: */    stw r3,0x1C(r1)
-    /* 000001C4: */    addi r0,r25,0x3628
-    /* 000001C8: */    stw r0,0x20(r1)
+
+/*---------------Sceptile Reflect BASE---------------*/
+    /* XXXXXXXX: */    stw r0,0x14(r1)
+    /* XXXXXXXX: */    addis r3,r25,0x3
+    /* XXXXXXXX: */    subi r0,r3,0x374
+
+    /* XXXXXXXX: */    stw r0,0x18(r1)
+    /* XXXXXXXX: */    lis r3,-0x0                              [R_PPC_ADDR16_HA(27, 6, "loc_3AC")]
+    /* XXXXXXXX: */    addi r3,r3,-0x0                          [R_PPC_ADDR16_LO(27, 6, "loc_3AC")]
+    /* XXXXXXXX: */    stw r3,0x1C(r1)
+    /* XXXXXXXX: */    addi r0,r25,0x3628
+    /* XXXXXXXX: */    stw r0,0x20(r1)
 /*---------------------------Search Base------------------------*/
 
                         addis r3,r25,0x3
@@ -351,12 +355,18 @@ loc_178:
     /* 00000550: */    lwz r0,0x2C(r24)
     /* 00000554: */    rlwinm r6,r0,25,24,31
     /* 00000558: */    bl soCollisionShieldModuleBuilder_73soCollisionShieldModuleBuildConfig_0_1_1_27soCollisionShieldModu_______ct
-    /* 0000055C: */    addi r3,r25,0x2C10
-    /* 00000560: */    addi r4,r25,0x9D0
-    /* 00000564: */    lwz r5,0x28(r24)
-    /* 00000568: */    lwz r0,0x2C(r24)
-    /* 0000056C: */    rlwinm r6,r0,25,24,31
-    /* 00000570: */    bl soCollisionReflectorModuleBuilder_75soCollisionReflectorModuleBuildConfig_0_12_3_27soCollisionShi_______ct
+
+    /*---------------------Sceptile Reflect Start------------------*/
+    /* XXXXXXXX: */    addis r3,r25,0x3
+    /* XXXXXXXX: */    subi r3,r3,0xD88
+
+    /* XXXXXXXX: */    addi r4,r25,0x9D0
+    /* XXXXXXXX: */    lwz r5,0x28(r24)
+    /* XXXXXXXX: */    lwz r0,0x2C(r24)
+    /* XXXXXXXX: */    rlwinm r6,r0,25,24,31
+    /* XXXXXXXX: */    bl soCollisionReflectorModuleBuilder_75soCollisionReflectorModuleBuildConfig_0_20_2_27soCollisionShi_______ct
+#Make sure that the BL goes to the new soCollisionReflector
+
     /* 00000574: */    addi r3,r25,0x34AC
     /* 00000578: */    addi r4,r25,0x9D0
     /* 0000057C: */    lwz r5,0x28(r24)
@@ -3572,98 +3582,105 @@ loc_3588:
     /* 00003598: */    mtlr r0
     /* 0000359C: */    addi r1,r1,0x20
     /* 000035A0: */    blr
-soCollisionReflectorModuleBuilder_75soCollisionReflectorModuleBuildConfig_0_12_3_27soCollisionShi_______ct:
-    /* 000035A4: */    stwu r1,-0x80(r1)
-    /* 000035A8: */    mflr r0
-    /* 000035AC: */    stw r0,0x84(r1)
-    /* 000035B0: */    addi r11,r1,0x80
-    /* 000035B4: */    bl __unresolved                          [R_PPC_REL24(0, 4, "runtime___savegpr_28")]
-    /* 000035B8: */    mr r28,r3
-    /* 000035BC: */    mr r29,r4
-    /* 000035C0: */    mr r30,r5
-    /* 000035C4: */    mr r31,r6
-    /* 000035C8: */    addi r3,r1,0x10
-    /* 000035CC: */    li r4,-0x0
-    /* 000035D0: */    li r5,0x3
-    /* 000035D4: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldPart____ct")]
-    /* 000035D8: */    mr r3,r28
-    /* 000035DC: */    li r4,0xC
-    /* 000035E0: */    addi r5,r1,0x10
-    /* 000035E4: */    li r6,-0x0
-    /* 000035E8: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_21soCollisionShieldPart_12_____ct")]
-    /* 000035EC: */    addi r3,r1,0x10
-    /* 000035F0: */    li r0,-0x1
-    /* 000035F4: */    extsh r4,r0
-    /* 000035F8: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldPart____dt")]
-    /* 000035FC: */    addi r3,r28,0x48C
-    /* 00003600: */    li r4,0x3
-    /* 00003604: */    li r5,-0x0
-    /* 00003608: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_22soCollisionShieldGroup_3_____ct")]
-    /* 0000360C: */    addi r3,r28,0x6C0
-    /* 00003610: */    li r4,0x3
-    /* 00003614: */    li r5,-0x0
-    /* 00003618: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_16soCollisionGroup_3_____ct")]
-    /* 0000361C: */    addi r3,r28,0x834
-    /* 00003620: */    mr r4,r29
-    /* 00003624: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldEventPresenterReflector____ct")]
-    /* 00003628: */    li r0,0x3
-    /* 0000362C: */    stw r0,0x8(r1)
-    /* 00003630: */    li r0,0x1
-    /* 00003634: */    stw r0,0xC(r1)
-    /* 00003638: */    addi r3,r28,0x844
-    /* 0000363C: */    mr r4,r29
-    /* 00003640: */    mr r5,r30
-    /* 00003644: */    rlwinm r6,r31,0,24,31
-    /* 00003648: */    mr r7,r28
-    /* 0000364C: */    addi r8,r28,0x6C0
-    /* 00003650: */    addi r9,r28,0x48C
-    /* 00003654: */    addi r10,r28,0x834
-    /* 00003658: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldModuleImpl____ct")]
-    /* 0000365C: */    mr r3,r28
-    /* 00003660: */    addi r11,r1,0x80
-    /* 00003664: */    bl __unresolved                          [R_PPC_REL24(0, 4, "runtime___restgpr_28")]
-    /* 00003668: */    lwz r0,0x84(r1)
-    /* 0000366C: */    mtlr r0
-    /* 00003670: */    addi r1,r1,0x80
-    /* 00003674: */    blr
-soCollisionReflectorModuleBuilder_75soCollisionReflectorModuleBuildConfig_0_12_3_27soCollisionShi_______dt:
-    /* 00003678: */    stwu r1,-0x20(r1)
-    /* 0000367C: */    mflr r0
-    /* 00003680: */    stw r0,0x24(r1)
-    /* 00003684: */    addi r11,r1,0x20
-    /* 00003688: */    bl __unresolved                          [R_PPC_REL24(0, 4, "runtime___savegpr_29")]
-    /* 0000368C: */    mr r29,r3
-    /* 00003690: */    mr r30,r4
-    /* 00003694: */    cmpwi r3,-0x0
-    /* 00003698: */    beq- loc_36EC
-    /* 0000369C: */    li r31,-0x1
-    /* 000036A0: */    extsh r4,r31
-    /* 000036A4: */    addi r3,r3,0x844
-    /* 000036A8: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldModuleImpl____dt")]
-    /* 000036AC: */    addi r3,r29,0x834
-    /* 000036B0: */    extsh r4,r31
-    /* 000036B4: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldEventPresenterReflector____dt")]
-    /* 000036B8: */    addi r3,r29,0x6C0
-    /* 000036BC: */    extsh r4,r31
-    /* 000036C0: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_16soCollisionGroup_3_____dt")]
-    /* 000036C4: */    addi r3,r29,0x48C
-    /* 000036C8: */    extsh r4,r31
-    /* 000036CC: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_22soCollisionShieldGroup_3_____dt")]
-    /* 000036D0: */    mr r3,r29
-    /* 000036D4: */    extsh r4,r31
-    /* 000036D8: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_21soCollisionShieldPart_12_____dt")]
-    /* 000036DC: */    extsh. r0,r30
-    /* 000036E0: */    ble- loc_36EC
-    /* 000036E4: */    mr r3,r29
-    /* 000036E8: */    bl __unresolved                          [R_PPC_REL24(0, 4, "srcommon____dl")]
+
+
+#These 2 functions were replaced using Lucarios Reflector data. All Non-reflector characters has enough data to make 18 hurtboxes into reflectiving boxes.
+#You can replace Marios current ct & dt with these 2
+soCollisionReflectorModuleBuilder_75soCollisionReflectorModuleBuildConfig_0_20_2_27soCollisionShi_______ct:
+    /* 00007654: */    stwu r1,-0x80(r1)
+    /* 00007658: */    mflr r0
+    /* 0000765C: */    stw r0,0x84(r1)
+    /* 00007660: */    addi r11,r1,0x80
+    /* 00007664: */    bl __unresolved                          [R_PPC_REL24(0, 4, "runtime___savegpr_28")]
+    /* 00007668: */    mr r28,r3
+    /* 0000766C: */    mr r29,r4
+    /* 00007670: */    mr r30,r5
+    /* 00007674: */    mr r31,r6
+    /* 00007678: */    addi r3,r1,0x10
+    /* 0000767C: */    li r4,-0x0
+    /* 00007680: */    li r5,0x3
+    /* 00007684: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldPart____ct")]
+    /* 00007688: */    mr r3,r28
+    /* 0000768C: */    li r4,0x14
+    /* 00007690: */    addi r5,r1,0x10
+    /* 00007694: */    li r6,-0x0
+    /* 00007698: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_21soCollisionShieldPart_20_____ct")]
+    /* 0000769C: */    addi r3,r1,0x10
+    /* 000076A0: */    li r0,-0x1
+    /* 000076A4: */    extsh r4,r0
+    /* 000076A8: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldPart____dt")]
+    /* 000076AC: */    addi r3,r28,0x78C
+    /* 000076B0: */    li r4,0x2
+    /* 000076B4: */    li r5,-0x0
+    /* 000076B8: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_22soCollisionShieldGroup_2_____ct")]
+    /* 000076BC: */    addi r3,r28,0x908
+    /* 000076C0: */    li r4,0x2
+    /* 000076C4: */    li r5,-0x0
+    /* 000076C8: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_16soCollisionGroup_2_____ct")]
+    /* 000076CC: */    addi r3,r28,0xA04
+    /* 000076D0: */    mr r4,r29
+    /* 000076D4: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldEventPresenterReflector____ct")]
+    /* 000076D8: */    li r0,0x3
+    /* 000076DC: */    stw r0,0x8(r1)
+    /* 000076E0: */    li r0,0x1
+    /* 000076E4: */    stw r0,0xC(r1)
+    /* 000076E8: */    addi r3,r28,0xA14
+    /* 000076EC: */    mr r4,r29
+    /* 000076F0: */    mr r5,r30
+    /* 000076F4: */    rlwinm r6,r31,0,24,31
+    /* 000076F8: */    mr r7,r28
+    /* 000076FC: */    addi r8,r28,0x908
+    /* 00007700: */    addi r9,r28,0x78C
+    /* 00007704: */    addi r10,r28,0xA04
+    /* 00007708: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldModuleImpl____ct")]
+    /* 0000770C: */    mr r3,r28
+    /* 00007710: */    addi r11,r1,0x80
+    /* 00007714: */    bl __unresolved                          [R_PPC_REL24(0, 4, "runtime___restgpr_28")]
+    /* 00007718: */    lwz r0,0x84(r1)
+    /* 0000771C: */    mtlr r0
+    /* 00007720: */    addi r1,r1,0x80
+    /* 00007724: */    blr
+soCollisionReflectorModuleBuilder_75soCollisionReflectorModuleBuildConfig_0_20_2_27soCollisionShi_______dt:
+    /* 00006220: */    stwu r1,-0x20(r1)
+    /* 00006224: */    mflr r0
+    /* 00006228: */    stw r0,0x24(r1)
+    /* 0000622C: */    addi r11,r1,0x20
+    /* 00006230: */    bl __unresolved                          [R_PPC_REL24(0, 4, "runtime___savegpr_29")]
+    /* 00006234: */    mr r29,r3
+    /* 00006238: */    mr r30,r4
+    /* 0000623C: */    cmpwi r3,-0x0
+    /* 00006240: */    beq- loc_36EC
+    /* 00006244: */    li r31,-0x1
+    /* 00006248: */    extsh r4,r31
+    /* 0000624C: */    addi r3,r3,0xA14
+    /* 00006250: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldModuleImpl____dt")]
+    /* 00006254: */    addi r3,r29,0xA04
+    /* 00006258: */    extsh r4,r31
+    /* 0000625C: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soCollisionShieldEventPresenterReflector____dt")]
+    /* 00006260: */    addi r3,r29,0x908
+    /* 00006264: */    extsh r4,r31
+    /* 00006268: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_16soCollisionGroup_2_____dt")]
+    /* 0000626C: */    addi r3,r29,0x78C
+    /* 00006270: */    extsh r4,r31
+    /* 00006274: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_22soCollisionShieldGroup_2_____dt")]
+    /* 00006278: */    mr r3,r29
+    /* 0000627C: */    extsh r4,r31
+    /* 00006280: */    bl __unresolved                          [R_PPC_REL24(27, 1, "soArrayVector_21soCollisionShieldPart_20_____dt")]
+    /* 00006284: */    extsh. r0,r30
+    /* 00006288: */    ble- loc_36EC
+    /* 0000628C: */    mr r3,r29
+    /* 00006290: */    bl __unresolved                          [R_PPC_REL24(0, 4, "srcommon____dl")]
 loc_36EC:
-    /* 000036EC: */    mr r3,r29
-    /* 000036F0: */    addi r11,r1,0x20
-    /* 000036F4: */    bl __unresolved                          [R_PPC_REL24(0, 4, "runtime___restgpr_29")]
-    /* 000036F8: */    lwz r0,0x24(r1)
-    /* 000036FC: */    mtlr r0
-    /* 00003700: */    addi r1,r1,0x20
-    /* 00003704: */    blr
+    /* 00006294: */    mr r3,r29
+    /* 00006298: */    addi r11,r1,0x20
+    /* 0000629C: */    bl __unresolved                          [R_PPC_REL24(0, 4, "runtime___restgpr_29")]
+    /* 000062A0: */    lwz r0,0x24(r1)
+    /* 000062A4: */    mtlr r0
+    /* 000062A8: */    addi r1,r1,0x20
+    /* 000062AC: */    blr
+
+
+
 soCollisionCatchModuleBuilder_71soCollisionCatchModuleBuildConfig_0_4_1_26soCollisionCatchModuleI_______ct:
     /* 00003708: */    stwu r1,-0x80(r1)
     /* 0000370C: */    mflr r0
@@ -9386,9 +9403,15 @@ soModuleAccesserBuilder_18ftMarioBuildConfig_____dt:
     /* 00008A24: */    addi r3,r29,0x34AC
     /* 00008A28: */    extsh r4,r31
     /* 00008A2C: */    bl soCollisionCatchModuleBuilder_71soCollisionCatchModuleBuildConfig_0_4_1_26soCollisionCatchModuleI_______dt
-    /* 00008A30: */    addi r3,r29,0x2C10
-    /* 00008A34: */    extsh r4,r31
-    /* 00008A38: */    bl soCollisionReflectorModuleBuilder_75soCollisionReflectorModuleBuildConfig_0_12_3_27soCollisionShi_______dt
+
+    /*---------------------Sceptile Reflect Start------------------*/
+    /* XXXXXXXX: */    addis r3,r29,0x3
+    /* XXXXXXXX: */    subi r3,r3,0xD88
+
+    /* XXXXXXXX: */    extsh r4,r31
+    /* XXXXXXXX: */    bl soCollisionReflectorModuleBuilder_75soCollisionReflectorModuleBuildConfig_0_20_2_27soCollisionShi_______dt
+#Make sure that the BL goes to the new soCollisionReflector
+
     /* 00008A3C: */    addi r3,r29,0x29F8
     /* 00008A40: */    extsh r4,r31
     /* 00008A44: */    bl soCollisionShieldModuleBuilder_73soCollisionShieldModuleBuildConfig_0_1_1_27soCollisionShieldModu_______dt
@@ -10775,7 +10798,7 @@ loc_9D80:
     /* 00009DAC: */    lis r3,-0x0                              [R_PPC_ADDR16_HA(91, 6, "loc_1D4")]
     /* 00009DB0: */    mr r4,r28
     /* 00009DB4: */    mr r5,r29
-    /* 00009DB8: */    li r7,0x1B
+    /* XXXXXXXX: */    li r7,0x50                   # fireball bone id
     /* 00009DBC: */    lwzu r12,-0x0(r3)                        [R_PPC_ADDR16_LO(91, 6, "loc_1D4")]
     /* 00009DC0: */    lwz r12,0x50(r12)
     /* 00009DC4: */    mtctr r12
@@ -15426,8 +15449,8 @@ ftClassInfoImpl_54_8ftMarioD___create:
     /* 0000DE04: */    mr r28,r5
     /* 0000DE08: */    mr r29,r6
     /* 0000DE0C: */    mr r30,r7
-    /* 0000DE10: */    lis r3,0x3
-    /* 0000DE14: */    subi r3,r3,0x0BF4
+    /* XXXXXXXX: */    lis r3,0x3
+    /* XXXXXXXX: */    subi r3,r3,0x0188
     /* 0000DE18: */    mr r4,r28
     /* 0000DE1C: */    bl __unresolved                          [R_PPC_REL24(0, 4, "srHeapType____nw")]
     /* 0000DE20: */    mr r31,r3
@@ -15493,8 +15516,8 @@ ftClassInfoImpl_0_7ftMario___create:
     /* 0000DF08: */    mr r29,r5
     /* 0000DF0C: */    mr r30,r6
     /* 0000DF10: */    mr r31,r7
-    /* 0000DF14: */    lis r3,0x3
-    /* 0000DF18: */    subi r3,r3,0x0BF4
+    /* XXXXXXXX: */    lis r3,0x3
+    /* XXXXXXXX: */    subi r3,r3,0x0188
     /* 0000DF1C: */    mr r4,r29
     /* 0000DF20: */    bl __unresolved                          [R_PPC_REL24(0, 4, "srHeapType____nw")]
     /* 0000DF24: */    cmpwi r3,-0x0
@@ -17627,7 +17650,7 @@ wnMarioMantle__active:
     /* 0000FE64: */    stw r0,0x94(r1)
     /* 0000FE68: */    addi r11,r1,0x90
     /* 0000FE6C: */    bl __unresolved                          [R_PPC_REL24(0, 4, "runtime___savegpr_28")]
-    /* 0000FE70: */    bl loc_19578
+    /* XXXXXXXX: */    mr r28,r3
     /* 0000FE74: */    mr r29,r7
     /* 0000FE78: */    lis r30,-0x0                             [R_PPC_ADDR16_HA(91, 4, "loc_34")]
     /* 0000FE7C: */    lfs f0,-0x0(r30)                         [R_PPC_ADDR16_LO(91, 4, "loc_34")]
@@ -17637,7 +17660,7 @@ wnMarioMantle__active:
     /* 0000FE8C: */    stw r4,0x24(r1)
     /* 0000FE90: */    stw r5,0x28(r1)
     /* 0000FE94: */    stw r5,0x2C(r1)
-    /* 0000FE98: */    nop
+    /* XXXXXXXX: */    stw r5,0x30(r1)
     /* 0000FE9C: */    li r0,-0x1
     /* 0000FEA0: */    stw r0,0x34(r1)
     /* 0000FEA4: */    stw r0,0x38(r1)
