@@ -1,0 +1,5 @@
+based off https://github.com/Sammi-Husky/BrawlEx/tree/SSE
+
+changes:
+-Enemy's ct now utilizes a custom soSlowModuleImpl, allowing them to be affected by slowing mechanisms.
+-Enemy's soSoundModule in the ct now uses 0x1 on the hitsfx flag, fixing menu sfx playing through the custom hit sfx code.
