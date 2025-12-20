@@ -28445,43 +28445,140 @@ wnPikminPikmin__setPowerMulStatus:
     /* 00019D98: */    lwz r12,0xB4(r12)
     /* 00019D9C: */    mtctr r12
     /* 00019DA0: */    bctr
+
+#############################################
+# notifyEventCollisionAttack start
+# Unlike all other connected articles, Pikmins have attack and attack check swapped
+# and also for 11 hitlag frames, instead of utilizing the normal hitlag calculations
+# based off szerosuit's notifyEventCollisionAttack, as we're mimicking her (correct) behavior
+# needs additional status check to not trigger the code below, otherwise breaks side B
+#############################################
 wnPikminPikmin__notifyEventCollisionAttack:
-    /* 00019DA4: */    stwu r1,-0x20(r1)
-    /* 00019DA8: */    mflr r0
-    /* 00019DAC: */    stw r0,0x24(r1)
-    /* 00019DB0: */    stfd f31,0x18(r1)
-    /* 00019DB4: */    stw r31,0x14(r1)
-    /* 00019DB8: */    stw r30,0x10(r1)
-    /* 00019DBC: */    mr r30,r3
-    /* 00019DC0: */    fmr f31,f1
-    /* 00019DC4: */    lwz r3,0x60(r3)
-    /* 00019DC8: */    lwz r3,0xD8(r3)
-    /* 00019DCC: */    lwz r3,0x64(r3)
-    /* 00019DD0: */    lis r31,0x1100
-    /* 00019DD4: */    addi r4,r31,0x1
-    /* 00019DD8: */    lwz r12,0x0(r3)
-    /* 00019DDC: */    lwz r12,0x38(r12)
-    /* 00019DE0: */    mtctr r12
-    /* 00019DE4: */    bctrl
-    /* 00019DE8: */    fcmpo cr0,f1,f31
-    /* 00019DEC: */    bge- loc_19E14
-    /* 00019DF0: */    lwz r3,0x60(r30)
-    /* 00019DF4: */    lwz r3,0xD8(r3)
-    /* 00019DF8: */    lwz r3,0x64(r3)
-    /* 00019DFC: */    fmr f1,f31
-    /* 00019E00: */    addi r4,r31,0x1
-    /* 00019E04: */    lwz r12,0x0(r3)
-    /* 00019E08: */    lwz r12,0x3C(r12)
-    /* 00019E0C: */    mtctr r12
-    /* 00019E10: */    bctrl
-loc_19E14:
-    /* 00019E14: */    lfd f31,0x18(r1)
-    /* 00019E18: */    lwz r31,0x14(r1)
-    /* 00019E1C: */    lwz r30,0x10(r1)
-    /* 00019E20: */    lwz r0,0x24(r1)
-    /* 00019E24: */    mtlr r0
-    /* 00019E28: */    addi r1,r1,0x20
-    /* 00019E2C: */    blr
+    /* XXXXXXXX: */    stwu r1,-0x30(r1)
+    /* XXXXXXXX: */    mflr r0
+    /* XXXXXXXX: */    stw r0,0x34(r1)
+    /* XXXXXXXX: */    stfd f31,0x20(r1)
+    /* XXXXXXXX: */    psq_st f31,0x28(r1),0,0
+    /* XXXXXXXX: */    addi r11,r1,0x20
+    /* XXXXXXXX: */    bl __unresolved                          [R_PPC_REL24("sora", 4, "runtime___savegpr_28")]
+    /* XXXXXXXX: */    fmr f31,f1
+    /* XXXXXXXX: */    mr r31,r3
+    /* XXXXXXXX: */    mr r28,r4
+    /* XXXXXXXX: */    mr r29,r5
+    /* XXXXXXXX: */    lwz r3,0x60(r3)
+    /* XXXXXXXX: */    lwz r3,0xD8(r3)
+    /* XXXXXXXX: */    lwz r3,0x64(r3)
+    /* XXXXXXXX: */    lis r4,0x1100
+    /* XXXXXXXX: */    addi r4,r4,0x1
+    /* XXXXXXXX: */    lwz r12,0x0(r3)
+    /* XXXXXXXX: */    lwz r12,0x38(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+    /* XXXXXXXX: */    fcmpo cr0,f1,f31
+    /* XXXXXXXX: */    bge- wnPikminPikmin__notifyEventCollisionAttack_1
+    /* XXXXXXXX: */    fmr f1,f31
+wnPikminPikmin__notifyEventCollisionAttack_1:
+    /* XXXXXXXX: */    mr r3,r31
+    /* XXXXXXXX: */    lis r4,0x1100
+    /* XXXXXXXX: */    addi r4,r4,0x1
+    /* XXXXXXXX: */    lwz r3,0x60(r31)
+    /* XXXXXXXX: */    lwz r3,0xD8(r3)
+    /* XXXXXXXX: */    lwz r3,0x64(r3)
+    /* XXXXXXXX: */    lwz r12,0x0(r3)
+    /* XXXXXXXX: */    lwz r12,0x3C(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+
+    /* XXXXXXXX: */    mr r3,r31
+    /* XXXXXXXX: */    bl wnPikminPikmin__isHitStopStatus
+    /* XXXXXXXX: */    cmpwi r3,0x0
+    /* XXXXXXXX: */    beq- wnPikminPikmin__notifyEventCollisionAttack_4
+    
+    /* XXXXXXXX: */    bl __unresolved                          [R_PPC_REL24("sora", 4, "gfTaskScheduler__getInstance")]
+    /* XXXXXXXX: */    lbz r4,0x22(r28)
+    /* XXXXXXXX: */    lwz r5,0xC(r28)
+    /* XXXXXXXX: */    bl __unresolved                          [R_PPC_REL24("sora", 4, "gfTaskScheduler__getTaskById")]
+    /* XXXXXXXX: */    mr r30,r3
+    /* XXXXXXXX: */    lwz r3,0xD8(r29)
+    /* XXXXXXXX: */    lwz r3,0x1C(r3)
+    /* XXXXXXXX: */    lbz r4,0x25(r28)
+    /* XXXXXXXX: */    lbz r5,0x27(r28)
+    /* XXXXXXXX: */    lwz r12,0x0(r3)
+    /* XXXXXXXX: */    lwz r12,0xB0(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+    /* XXXXXXXX: */    mr r4,r3
+    /* XXXXXXXX: */    mr r3,r29
+    /* XXXXXXXX: */    fmr f1,f31
+    /* XXXXXXXX: */    lis r5,0x0                               [R_PPC_ADDR16_HA("ft_pikmin", 4, "loc_88")]
+    /* XXXXXXXX: */    lfs f2,0x0(r5)                           [R_PPC_ADDR16_LO("ft_pikmin", 4, "loc_88")]
+    /* XXXXXXXX: */    fmr f3,f2
+    /* XXXXXXXX: */    li r5,0x0
+    /* XXXXXXXX: */    bl __unresolved                          [R_PPC_REL24("sora_melee", 1, "soDamageUtilActor__calcHitStopFrame")]
+    /* XXXXXXXX: */    mr r29,r3
+    /* XXXXXXXX: */    lbz r0,0x21(r28)
+    /* XXXXXXXX: */    cmplwi r0,0x1
+    /* XXXXXXXX: */    bne- wnPikminPikmin__notifyEventCollisionAttack_2
+    /* XXXXXXXX: */    cmpwi r30,0x0
+    /* XXXXXXXX: */    beq- wnPikminPikmin__notifyEventCollisionAttack_2
+    /* XXXXXXXX: */    mr r3,r30
+    /* XXXXXXXX: */    li r4,0x3C
+    /* XXXXXXXX: */    lis r5,0x0                               [R_PPC_ADDR16_HA("ft_pikmin", 5, "loc_2950")]
+    /* XXXXXXXX: */    addi r5,r5,0x0                           [R_PPC_ADDR16_LO("ft_pikmin", 5, "loc_2950")]
+    /* XXXXXXXX: */    lis r6,0x0                               [R_PPC_ADDR16_HA("ft_pikmin", 5, "loc_2A50")]
+    /* XXXXXXXX: */    addi r6,r6,0x0                           [R_PPC_ADDR16_LO("ft_pikmin", 5, "loc_2A50")]
+    /* XXXXXXXX: */    li r0,0x1
+    /* XXXXXXXX: */    extsh r7,r0
+    /* XXXXXXXX: */    bl __unresolved                          [R_PPC_REL24("sora", 4, "MWRTTI____dynamic_cast")]
+    /* XXXXXXXX: */    bl __unresolved                          [R_PPC_REL24("sora_melee", 1, "soExternalValueAccesser__getCollisionHitModule")]
+    /* XXXXXXXX: */    mr r30,r3
+    /* XXXXXXXX: */    lwz r12,0x0(r3)
+    /* XXXXXXXX: */    lwz r12,0xC0(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+    /* XXXXXXXX: */    cmpwi r3,0x0
+    /* XXXXXXXX: */    beq- wnPikminPikmin__notifyEventCollisionAttack_2
+    /* XXXXXXXX: */    mr r3,r30
+    /* XXXXXXXX: */    lwz r12,0x0(r30)
+    /* XXXXXXXX: */    lwz r12,0xC4(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+    /* XXXXXXXX: */    mr r29,r3
+wnPikminPikmin__notifyEventCollisionAttack_2:
+    /* XXXXXXXX: */    lwz r3,0x60(r31)
+    /* XXXXXXXX: */    lwz r3,0xD8(r3)
+    /* XXXXXXXX: */    lwz r3,0x64(r3)
+    /* XXXXXXXX: */    lis r4,0x1000
+    /* XXXXXXXX: */    addi r4,r4,0x8
+    /* XXXXXXXX: */    lwz r12,0x0(r3)
+    /* XXXXXXXX: */    lwz r12,0x18(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+    /* XXXXXXXX: */    mr r4,r3
+    /* XXXXXXXX: */    cmpw r3,r29
+    /* XXXXXXXX: */    bge- wnPikminPikmin__notifyEventCollisionAttack_3
+    /* XXXXXXXX: */    mr r4,r29
+wnPikminPikmin__notifyEventCollisionAttack_3:
+    /* XXXXXXXX: */    lwz r3,0x60(r31)
+    /* XXXXXXXX: */    lwz r3,0xD8(r3)
+    /* XXXXXXXX: */    lwz r3,0x64(r3)
+    /* XXXXXXXX: */    lis r5,0x1000
+    /* XXXXXXXX: */    addi r5,r5,0x8
+    /* XXXXXXXX: */    lwz r12,0x0(r3)
+    /* XXXXXXXX: */    lwz r12,0x1C(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+wnPikminPikmin__notifyEventCollisionAttack_4:    
+    /* XXXXXXXX: */    psq_l f31,0x28(r1),0,0
+    /* XXXXXXXX: */    lfd f31,0x20(r1)
+    /* XXXXXXXX: */    addi r11,r1,0x20
+    /* XXXXXXXX: */    bl __unresolved                          [R_PPC_REL24("sora", 4, "runtime___restgpr_28")]
+    /* XXXXXXXX: */    lwz r0,0x34(r1)
+    /* XXXXXXXX: */    mtlr r0
+    /* XXXXXXXX: */    addi r1,r1,0x30
+    /* XXXXXXXX: */    blr
+
+
 wnPikminPikmin__isHitStopStatus:
     /* 00019E30: */    stwu r1,-0x10(r1)
     /* 00019E34: */    mflr r0
@@ -28557,6 +28654,15 @@ loc_19F24:
     /* 00019F34: */    mtlr r0
     /* 00019F38: */    addi r1,r1,0x20
     /* 00019F3C: */    blr
+
+#############################################
+# notifyEventCollisionAttackCheck start
+# Unlike all other connected articles, Pikmins have attack and attack check swapped
+# and also for 11 hitlag frames, instead of utilizing the normal hitlag calculations
+# this section here is Pikmin's notifyEventCollisionAttackCheck
+# + szerosuit's AttackCheck setHitStopFrame
+# + szerosuit's passed values from NotifyEventCollisionAttack
+#############################################
 wnPikminPikmin__notifyEventCollisionAttackCheck:
     /* 00019F40: */    stwu r1,-0x30(r1)
     /* 00019F44: */    mflr r0
@@ -28568,32 +28674,53 @@ wnPikminPikmin__notifyEventCollisionAttackCheck:
     /* 00019F5C: */    bl wnPikminPikmin__isHitStopStatus
     /* 00019F60: */    cmpwi r3,0x0
     /* 00019F64: */    beq- loc_19FD0
-    /* 00019F68: */    lwz r3,0x60(r31)
-    /* 00019F6C: */    lwz r3,0xD8(r3)
-    /* 00019F70: */    lwz r3,0x64(r3)
-    /* 00019F74: */    lis r30,0x1100
-    /* 00019F78: */    addi r4,r30,0x1
-    /* 00019F7C: */    lwz r12,0x0(r3)
-    /* 00019F80: */    lwz r12,0x38(r12)
-    /* 00019F84: */    mtctr r12
-    /* 00019F88: */    bctrl
-    /* 00019F8C: */    lis r3,0x0                               [R_PPC_ADDR16_HA("ft_pikmin", 4, "loc_64")]
-    /* 00019F90: */    lfs f0,0x0(r3)                           [R_PPC_ADDR16_LO("ft_pikmin", 4, "loc_64")]
-    /* 00019F94: */    fcmpo cr0,f1,f0
-    /* 00019F98: */    ble- loc_19FD0
-    /* 00019F9C: */    lwz r3,0x60(r31)
-    /* 00019FA0: */    lwz r3,0xD8(r3)
-    /* 00019FA4: */    lwz r3,0x64(r3)
-    /* 00019FA8: */    addi r4,r30,0x1
-    /* 00019FAC: */    lwz r12,0x0(r3)
-    /* 00019FB0: */    lwz r12,0x38(r12)
-    /* 00019FB4: */    mtctr r12
-    /* 00019FB8: */    bctrl
-    /* 00019FBC: */    mr r3,r31
-    /* 00019FC0: */    li r4,0x0
-    /* 00019FC4: */    lis r5,0x0                               [R_PPC_ADDR16_HA("ft_pikmin", 4, "loc_5C")]
-    /* 00019FC8: */    lfs f2,0x0(r5)                           [R_PPC_ADDR16_LO("ft_pikmin", 4, "loc_5C")]
-    /* 00019FCC: */    bl __unresolved                          [R_PPC_REL24("sora_melee", 1, "Weapon__setHitStop")]
+
+
+    /* XXXXXXXX: */    lwz r3,0x60(r31)
+    /* XXXXXXXX: */    lwz r3,0xD8(r3)
+    /* XXXXXXXX: */    lwz r3,0x64(r3)
+    /* XXXXXXXX: */    lis r12,0x1000
+    /* XXXXXXXX: */    addi r4,r12,0x8
+    /* XXXXXXXX: */    lwz r12,0x0(r3)
+    /* XXXXXXXX: */    lwz r12,0x18(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+    /* XXXXXXXX: */    mr r4,r3
+    /* XXXXXXXX: */    cmpwi r3,0x0
+    /* XXXXXXXX: */    ble- loc_19FD0
+
+
+    /* XXXXXXXX: */    lwz r3,0x60(r31)             # \
+    /* XXXXXXXX: */    lwz r3,0xD8(r3)              # |
+    /* XXXXXXXX: */    lwz r3,0x44(r3)              # |
+    /* XXXXXXXX: */    li r5,0x0                    # | <- yes it's 0
+    /* XXXXXXXX: */    lwz r12,0x0(r3)              # |
+    /* XXXXXXXX: */    lwz r12,0x48(r12)            # |
+    /* XXXXXXXX: */    mtctr r12                    # |
+    /* XXXXXXXX: */    bctrl                        # / setHitStopFrame
+
+    /* XXXXXXXX: */    lwz r3,0x60(r31)
+    /* XXXXXXXX: */    lwz r3,0xD8(r3)
+    /* XXXXXXXX: */    lwz r3,0x64(r3)
+    /* XXXXXXXX: */    lis r4,0x0                               [R_PPC_ADDR16_HA("ft_pikmin", 4, "loc_90")]
+    /* XXXXXXXX: */    lfs f1,0x0(r4)                           [R_PPC_ADDR16_LO("ft_pikmin", 4, "loc_90")]
+    /* XXXXXXXX: */    lis r4,0x1100
+    /* XXXXXXXX: */    addi r4,r4,0x1
+    /* XXXXXXXX: */    lwz r12,0x0(r3)
+    /* XXXXXXXX: */    lwz r12,0x3C(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+    /* XXXXXXXX: */    lwz r3,0x60(r31)
+    /* XXXXXXXX: */    lwz r3,0xD8(r3)
+    /* XXXXXXXX: */    lwz r3,0x64(r3)
+    /* XXXXXXXX: */    li r4,0x0
+    /* XXXXXXXX: */    lis r12,0x1000
+    /* XXXXXXXX: */    addi r5,r12,0x8
+    /* XXXXXXXX: */    lwz r12,0x0(r3)
+    /* XXXXXXXX: */    lwz r12,0x1C(r12)
+    /* XXXXXXXX: */    mtctr r12
+    /* XXXXXXXX: */    bctrl
+
 loc_19FD0:
     /* 00019FD0: */    stw r29,0x8(r1)
     /* 00019FD4: */    rlwinm. r0,r29,29,31,31
