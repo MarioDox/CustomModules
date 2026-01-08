@@ -1,0 +1,9 @@
+Name: Megaman Backport
+Description: Recreation of many megaman mechanics for the Megaman backport PSA. https://gamebanana.com/mods/644738
+Version: 1.0
+Other info: 
+-Module coding for all Megaman items, including Metal Blade, Crash Bomb, Leaf Shield and Rush.
+Credits:
+-MarioDox
+-Megaman backport team
+-P+DT/PMDT
