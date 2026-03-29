@@ -1,0 +1,6 @@
+Name: The Red Mist
+Description: PoC for BP swapping and music changing PSA commands.
+Version: 1.0
+Credits:
+-MarioDox
+-Project Moon
